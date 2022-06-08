@@ -31,3 +31,21 @@ class Post(models.Model):
     caption = models.CharField(max_length=500, verbose_name="Caption")
     posted = models.DateField(auto_now_add=True)
     pub_date = models.DateTimeField(auto_now_add=True)
+    
+
+class Comment(models.Model):
+    comment_post = models.ForeignKey(Post,null=True,on_delete=models.SET_NULL,related_name="comment")
+    comment_user = models.ForeignKey(User,null=True,on_delete=models.CASCADE)
+    comment = models.CharField(blank=False, max_length=255)
+    comment_date = models.DateTimeField(auto_now_add=True, null=True)
+
+    def __str__(self):
+        return self.comment
+
+    def save_comment(self):
+        self.save()
+
+    @classmethod
+    def delete_comment(cls,id):
+        comment = Comment.objects.get(id=id)
+        comment.delete()
