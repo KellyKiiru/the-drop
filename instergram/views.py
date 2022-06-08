@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
-@login_required(login_url='signup')
+@login_required(login_url='/accounts/login/')
 def homepage(request):
     return HttpResponse("Hello World")
 def signup(request):
