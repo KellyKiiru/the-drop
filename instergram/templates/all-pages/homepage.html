@@ -122,7 +122,7 @@
             <div class="posts">
                 {% for post in post %}
                 <article class="post">
-                    <img src="{{post.image.url}} " alt="{{post.name}}">
+                    <img src="{{post.picture.url}} " alt="{{post.name}}">
                     {{post.caption}}
                     
                 </article>
@@ -130,7 +130,7 @@
                 <section class="side-menu">
                     <div class="side-menu__user-profile">
                         <a href="#" target="_blank" class="side-menu__user-avatar">
-                            <img src="{{ request.user.profile_picture.url }}" alt="User Picture">
+                            <img src="{{ request.user.profile_image.url }}" alt="User Picture">
                         </a>
                         <div class="side-menu__user-info">
                             {% if user.profile.first_name %}
