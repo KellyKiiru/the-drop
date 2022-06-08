@@ -122,15 +122,39 @@
             <div class="posts">
                 {% for post in post %}
                 <article class="post">
+                    <div class="post__header">
+                            
+                        <div class="post__profile">
+                            {% if post.user.profile.image %}
+                            <a href="{{post.user.profile.image.url}}" class="post__avatar">
+                                
+                                <img src="{{post.user.profile.image.url}}" alt="User Picture">
+                                
+                            </a>
+                            {% endif %}
+                            <a href="{{post.user.username}}" class="post__user">{{ post.user.username }}</a>
+                            
+                        </div>
+                    
+                    <button class="post__more-options">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="6.5" cy="11.5" r="1.5" fill="var(--text-dark)"/>
+                            <circle cx="12" cy="11.5" r="1.5" fill="var(--text-dark)"/>
+                            <circle cx="17.5" cy="11.5" r="1.5" fill="var(--text-dark)"/>
+                        </svg>
+                    </button>
+                </div>
                     <img src="{{post.picture.url}} " alt="{{post.name}}">
                     {{post.caption}}
+                    {{post.pub_date}}
+                    {{post.user}}
                     
                 </article>
                 {% endfor %}
                 <section class="side-menu">
                     <div class="side-menu__user-profile">
                         <a href="#" target="_blank" class="side-menu__user-avatar">
-                            <img src="{{ request.user.profile_image.url }}" alt="User Picture">
+                            <img src="{{ request.user.profile.image.url }}" alt="User Picture">
                         </a>
                         <div class="side-menu__user-info">
                             {% if user.profile.first_name %}
