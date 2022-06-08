@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'instergram',
     'bootstrap3',
+    'tinymce',
 ]
 
 MIDDLEWARE = [
