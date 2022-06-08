@@ -50,7 +50,5 @@ def signup(request):
     }
     return render(request, 'all-pages/registration_form.html', context)
 
-def signin(request):
-    pass
-def logout(request):
-    pass
+def Profile(request):
+    pass    

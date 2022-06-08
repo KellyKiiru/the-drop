@@ -17,7 +17,14 @@ class Profile(models.Model):
     def save(self):
         self.save()
         
-    
+def create_user_profile( instance, created,):
+    if created:
+        Profile.objects.create(user=instance)
+
+def save_user_profile(instance):
+    instance.profile.save()
+
+
 class Post(models.Model):
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     picture = models.ImageField(upload_to="static/", verbose_name="Picture")
