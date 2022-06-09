@@ -32,3 +32,6 @@ class NewPostform(forms.ModelForm):
     class Meta:
         model = Post
         fields = ['picture', 'caption']
+class EditProfile(forms.ModelForm):
+    class meta:
+        pass
