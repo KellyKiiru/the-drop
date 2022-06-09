@@ -13,13 +13,35 @@ def homepage(request):
     profile = Profile.objects.all()
     post = Post.objects.all()
     title = 'Welcome to instagram'
-        
+    post_comments = Comment.objects.all()
+    comment_form = NewCommentForm()
+    
+    if request.method == 'POST':
+        comment_form = NewCommentForm(request.POST)
+        if comment_form.is_valid():
+            comment_post_id = request.POST.get('comment_post')
+
+            user = request.user
+            user_profile = Profile.objects.get(user=user.id)
+            comment_post = Post.objects.get(id=comment_post_id)
+            user_comment = comment_form.cleaned_data['comment']
+
+            comment = Comment(
+                user=user,
+                user_profile=user_profile,
+                user_comment=user_comment,
+                comment_post=comment_post
+                )
+            comment.save()
+            return redirect('homepage')
+    
     context = {
         'post': post,
         'profile': profile,
         'all_users': all_users,
         'title':title,
         'user':user,
+        'post_comments':post_comments,
     }
     return render(request,'all-pages/homepage.html', context=context)
 

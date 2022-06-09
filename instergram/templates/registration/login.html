@@ -25,11 +25,11 @@
           <div class="logo">
             <img src="{% static 'assets2/images/logo.png' %}" alt="logo">
           </div>
-          <!-- <input type="text" placeholder="Phone number, username, or email"> -->
-          <!-- <input type="password" placeholder="Password"> -->
-          {{form}}
-          <button class="form-btn"type="submit" name="Login">Log in</button>
-          <!-- <a href="index.html" class="form-btn" type="submit">Log in</a> -->
+
+          <input type="text" name="username" class="accounts-username" autofocus="true" required="true"
+            placeholder="Username" />
+          <input type="password" name="password" class="accounts-password" required="true" placeholder="Password" />
+          <input type="submit" name="Login" class="accounts-submit btn-primary" /><br>
           <span class="has-separator">Or</span>
           <a class="facebook-login" href="#">
             <i class="fab fa-facebook-square"></i> Log in with Facebook
@@ -37,12 +37,12 @@
           <a class="password-reset" href="#">Forgot password?</a>
         </form>
         <div class="sign-up">
-          Don't have an account? <a href="{% url 'sign-up' %}">Sign up</a>
+          Click here to log in<a href="{% url 'sign-up' %}">Login</a>
         </div>
         <div class="get-the-app">
           <span>Get the app.</span>
           <div class="badges">
-                        <img src="{% static 'assets2/images/app-store.png' %}" alt="app-store badge">
+            <img src="{% static 'assets2/images/app-store.png' %}" alt="app-store badge">
 
             <img src="{% static 'assets2/images/google-play.png' %}" alt="google-play badge">
 

@@ -43,20 +43,18 @@
                         <h5 style="font-size: 15px;" class="profile-user-name">@{{user_profile.user.username}}</h5>
 
                         {% if request.user.is_authenticated %}
+                        <a style="text-decoration: none;" href="{% url 'editprofile' %}" class="btn profile-edit-btn">Edit Profile</a>
                         <button class="btn profile-settings-btn" aria-label="profile settings"><i class="fas fa-cog" aria-hidden="true"></i></button>
                         {% endif %}
                     </div>
 
                     <div class="profile-bio">
                     <br>
-                    {% if profile.bio %}
+                    {% if user_profile.bio %}
                     <p><span class="profile-real-name"></span>◉ {{user_profile.bio}}</p>
                     {% endif %}
-                    {% if profile.location %}
+                    {% if user_profile.location %}
                     <p><span class="profile-real-name"></span>◉ {{user_profile.location}}</p>
-                    {% endif %}
-                    {% if profile.url %}
-                    <p><span class="profile-real-name"></span>◉ <a href="{{user_profile.url}}">{{user_profile.url}}</a></p>
                     {% endif %}
                     <br><br>
                 </div>
