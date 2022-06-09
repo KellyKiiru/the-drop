@@ -18,7 +18,8 @@ def homepage(request):
         'post': post,
         'profile': profile,
         'all_users': all_users,
-        'title':title
+        'title':title,
+        'user':user,
     }
     return render(request,'all-pages/homepage.html', context=context)
 
