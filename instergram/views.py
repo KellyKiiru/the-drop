@@ -94,7 +94,7 @@ def userprofile(request,username):
     return render(request,'all-pages/profile.html',context=context)
 
 
-@login_required
+@login_required(login_url='login')
 def newpost(request):
     form = NewPostform(request.POST, request.FILES)
     
@@ -119,3 +119,7 @@ def newpost(request):
         'form': form
     }
     return render(request, 'all-pages/newpost.html', context=context)
+
+@login_required(login_url='login')
+def like(request):
+    return redirect(request, 'all-pages/homepage')
