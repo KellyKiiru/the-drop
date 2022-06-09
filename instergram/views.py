@@ -6,7 +6,7 @@ from .forms import *
 from django.contrib.auth import authenticate, login
 
 # Create your views here.
-@login_required(login_url='login/')
+@login_required(login_url='sign-up')
 def homepage(request):
     user= request.user
     all_users = User.objects.all()
@@ -30,15 +30,14 @@ def signup(request):
             new_user = form.save()
             
             username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
             user_profile=Profile(
                 user=new_user,
-                name=username
+                username=username
             )
             user_profile.save_profile()
             
             new_user = authenticate(username=form.cleaned_data['username'],
-                                    password=form.cleaned_data['password'],)
+                                    password=form.cleaned_data['password1'],)
             login(request, new_user)
             # return redirect('editprofile')
             return redirect('homepage')
@@ -49,7 +48,7 @@ def signup(request):
     context = {
         'form': form,
     }
-    return render(request, 'all-pages/registration_form.html', context=context)
+    return render(request, 'registration/registration_form.html', context=context)
 
 
 @login_required(login_url='login/')
