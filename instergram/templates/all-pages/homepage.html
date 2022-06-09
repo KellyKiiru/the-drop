@@ -131,18 +131,9 @@
                                 <img src="{{post.user.image.url}}" alt="User Picture">
                                 
                             </a>
+                            <a href="{{post.user.first_name}}" class="post__user">{{post.user.first_name}}</a>
                             {% endif %}
-                            <a href="{{post.user.username}}" class="post__user">{{ post.user.username }}</a>
-                            
                         </div>
-                    
-                    <button class="post__more-options">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="6.5" cy="11.5" r="1.5" fill="var(--text-dark)"/>
-                            <circle cx="12" cy="11.5" r="1.5" fill="var(--text-dark)"/>
-                            <circle cx="17.5" cy="11.5" r="1.5" fill="var(--text-dark)"/>
-                        </svg>
-                    </button>
                 </div>
                     <img src="{{post.picture.url}} " alt="{{post.name}}">
                     {{post.caption}}
