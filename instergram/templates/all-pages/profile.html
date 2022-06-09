@@ -42,7 +42,7 @@
                         {% endif %}
                         <h5 style="font-size: 15px;" class="profile-user-name">@{{user_profile.user.username}}</h5>
 
-                        {% if request.user.is_authenticated %}
+                        {% if request.user.is_authenticated and request.user == user_profile.user %}
                         <a style="text-decoration: none;" href="{% url 'editprofile' %}" class="btn profile-edit-btn">Edit Profile</a>
                         <button class="btn profile-settings-btn" aria-label="profile settings"><i class="fas fa-cog" aria-hidden="true"></i></button>
                         {% endif %}
@@ -64,8 +64,6 @@
 
                     <ul>
                         <li><span class="profile-stat-count">{{posts_count}}</span> posts</li>
-                        <li><span class="profile-stat-count">{{followers_count}}</span> followers</li>
-                        <li><span class="profile-stat-count">{{following_count}}</span> following</li>
                     </ul>
                     <br>
                     

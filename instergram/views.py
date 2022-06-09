@@ -46,6 +46,7 @@ def homepage(request):
     return render(request,'all-pages/homepage.html', context=context)
 
 def signup(request):
+    form = UserSignUpForm()
     if request.method == "POST":
         form = UserSignUpForm(request.POST)
         if form.is_valid():
@@ -76,10 +77,10 @@ def signup(request):
 @login_required(login_url='login/')
 def userprofile(request,username):
     user_name = User.objects.get(username=username)
-    
     user_profile = Profile.objects.get(user=user_name.id)
 
     user_posts = Post.objects.filter(user=user_name.id)
+    posts_count = Post.objects.filter(user=user_profile).count()
     post_comments = Comment.objects.all()
 
     comment_form = NewCommentForm()
@@ -112,6 +113,7 @@ def userprofile(request,username):
         'user_posts':user_posts,
         'post_comments':post_comments,
         'title':title,
+        'posts_count':posts_count,
     }
     return render(request,'all-pages/profile.html',context=context)
 

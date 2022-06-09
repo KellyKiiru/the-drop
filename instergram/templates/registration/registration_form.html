@@ -1,5 +1,6 @@
 {%extends "registration/base.html"%} {% load bootstrap3 %}
 {% block content %}
+{% load crispy_forms_tags %}
 {% load static %}
 
 <!DOCTYPE html>
@@ -20,21 +21,13 @@
     <div class="container">
       <div class="phone-app-demo"></div>
       <div class="form-data">
-        <form action="/accounts/register/" method="POST">
+        <form action="" method="POST">
           {% csrf_token %}
           <div class="logo">
             <img src="{% static 'assets2/images/logo.png' %}" alt="logo">
           </div>
-          <!-- <input type="text" placeholder="Phone number, username, or email"> -->
-          <!-- <input type="password" placeholder="Password"> -->
-          {{form.username}}
-          {{form.email}}
-          {{form.password1}}
-          {{form.password2}}
+          {{form|crispy}}
           <button class="form-btn" type="submit">Login</button>
-
-
-          <!-- <a href="index.html" class="form-btn" type="submit">Log in</a> -->
           <span class="has-separator">Or</span>
           <a class="facebook-login" href="#">
             <i class="fab fa-facebook-square"></i> Log in with Facebook
