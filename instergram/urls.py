@@ -15,6 +15,7 @@ urlpatterns= [
     path('login/', auth_views.LoginView.as_view(),name='login'),
     #path('sign-in/', auth_views.LoginView.as_view(template_name="registration/sign-in.html", redirect_authenticated_user=True), name='sign-in'),
     path('logout/',auth_views.LoginView.as_view(),{"next_page": '/'},name='logout'),
+    path('<username>/follow/<option>/', follow, name='follow'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -4,6 +4,9 @@ from django.contrib.auth.decorators import login_required
 from .models import *
 from .forms import *
 from django.contrib.auth import authenticate, login
+from django.db import transaction
+from django.urls import reverse
+from django.http import HttpResponseRedirect
 
 # Create your views here.
 @login_required(login_url='sign-up')
@@ -184,3 +187,19 @@ def editprofile(request):
         'form':form,
     }
     return render(request, 'all-pages/editprofile.html',context=context)
+
+
+def follow(request, username, option):
+    user = request.user
+    following = get_object_or_404(User, username=username)
+
+    try:
+        f, created = Follow.objects.get_or_create(follower=request.user, following=following)
+
+        if int(option) == 0:
+            f.delete()
+        return HttpResponseRedirect(reverse('homepage'))
+
+    except User.DoesNotExist:
+        return HttpResponseRedirect(reverse('homepage'))
+
