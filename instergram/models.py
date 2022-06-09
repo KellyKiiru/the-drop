@@ -14,8 +14,8 @@ class Profile(models.Model):
     def __str__(self):
         return f'{self.user.username} - Profile'
     
-    def save(self):
-        self.save()
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
         
 def create_user_profile( instance, created,):
     if created:
@@ -34,10 +34,11 @@ class Post(models.Model):
     
 
 class Comment(models.Model):
-    comment_post = models.ForeignKey(Post,null=True,on_delete=models.SET_NULL,related_name="comment")
     comment_user = models.ForeignKey(User,null=True,on_delete=models.CASCADE)
+    user_profile = models.ForeignKey(Profile,null=True,on_delete=models.SET_NULL)
     comment = models.CharField(blank=False, max_length=255)
     comment_date = models.DateTimeField(auto_now_add=True, null=True)
+    comment_post = models.ForeignKey(Post,null=True,on_delete=models.SET_NULL)
 
     def __str__(self):
         return self.comment

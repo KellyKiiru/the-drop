@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from .models import *
@@ -50,5 +50,42 @@ def signup(request):
     }
     return render(request, 'all-pages/registration_form.html', context)
 
-def Profile(request):
-    pass    
+
+@login_required(login_url='login')
+def userprofile(request,username):
+    user_name = User.objects.get(username=username)
+    
+    user_profile = Profile.objects.get(user=user_name.id)
+
+    user_posts = Post.objects.filter(user=user_name.id)
+    post_comments = Comment.objects.all()
+
+    comment_form = NewCommentForm()
+
+    if request.method == 'POST':
+        comment_form = NewCommentForm(request.POST)
+        if comment_form.is_valid():
+            comment_post_id = request.POST.get('comment_post')
+
+            user = request.user
+            user_profile = Profile.objects.get(user=user.id)
+            comment_post = Post.objects.get(id=comment_post_id)
+            user_comment = comment_form.cleaned_data['comment']
+
+            comment = Comment(
+                user=user,
+                user_profile=user_profile,
+                user_comment=user_comment,
+                comment_post=comment_post
+                )
+            comment.save()
+            return redirect('homepage')
+    
+    context={
+        'user_name':user_name,
+        'comment_form':comment_form,
+        'user_profile':user_profile,
+        'user_posts':user_posts,
+        'post_comments':post_comments
+    }
+    return render(request,'all-pages/profile.html',context=context)

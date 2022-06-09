@@ -125,10 +125,10 @@
                     <div class="post__header">
                             
                         <div class="post__profile">
-                            {% if post.user.profile.image %}
-                            <a href="{{post.user.profile.image.url}}" class="post__avatar">
+                            {% if post.user.image %}
+                            <a href="{{post.user.image.url}}" class="post__avatar">
                                 
-                                <img src="{{post.user.profile.image.url}}" alt="User Picture">
+                                <img src="{{post.user.image.url}}" alt="User Picture">
                                 
                             </a>
                             {% endif %}
@@ -154,7 +154,7 @@
                 <section class="side-menu">
                     <div class="side-menu__user-profile">
                         <a href="#" target="_blank" class="side-menu__user-avatar">
-                            <img src="{{ request.user.profile.image.url }}" alt="User Picture">
+                            <img src="{{request.user.profile.image.url}}" alt="User Picture">
                         </a>
                         <div class="side-menu__user-info">
                             {% if user.profile.first_name %}
@@ -165,7 +165,7 @@
                             {% endif %}
                             <span>@{{request.user.username}}</span>
                         </div>
-                        <a class="side-menu__user-button" href="">View Profile</a>
+                        <a class="side-menu__user-button" href="{% url 'profile' user.username  %}">View Profile</a>
 
                     </div>
 
