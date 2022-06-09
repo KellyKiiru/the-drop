@@ -38,7 +38,7 @@
                                 </svg>
                             </div>
                             <div class="story__picture">
-                                <img src="{{profile.image.url}}" alt="{{user.profile.first_name}}">
+                                <img src="{{user.profile.image.url}}" alt="{{user.profile.first_name}}">
                             </div>
                         </div>
                         <span>@{{user.username}}</span>
@@ -145,6 +145,9 @@
                             {% for user in all_users %}
                                 {% if request.user.username != user.username %}
                                 <div class="side-menu__suggestion">
+                                    <a href="{% url 'profile' user %}" class="side-menu__suggestion-avatar">
+                                        <img src="{{user.profile.image.url}}" alt="User Picture">
+                                    </a>
                                     <div class="side-menu__suggestion-info">
                                         {% if user.profile.first_name %}
                                         <a href="{% url 'profile' user %}">{{user.profile.first_name|title}} {{user.profile.last_name|title}}</a>
