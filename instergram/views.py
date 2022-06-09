@@ -61,6 +61,8 @@ def userprofile(request,username):
     post_comments = Comment.objects.all()
 
     comment_form = NewCommentForm()
+    user_name_title = user_name
+    title = f"{user_name_title}'s Profile"
 
     if request.method == 'POST':
         comment_form = NewCommentForm(request.POST)
@@ -86,6 +88,13 @@ def userprofile(request,username):
         'comment_form':comment_form,
         'user_profile':user_profile,
         'user_posts':user_posts,
-        'post_comments':post_comments
+        'post_comments':post_comments,
+        'title':title,
     }
     return render(request,'all-pages/profile.html',context=context)
+
+
+@login_required
+def newpost(request):
+    
+    return render(request, 'all-pages/newpost.html')
