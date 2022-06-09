@@ -6,7 +6,7 @@ from .forms import *
 from django.contrib.auth import authenticate, login
 
 # Create your views here.
-@login_required(login_url='login')
+@login_required(login_url='login/')
 def homepage(request):
     user= request.user
     all_users = User.objects.all()
@@ -51,7 +51,7 @@ def signup(request):
     return render(request, 'all-pages/registration_form.html', context=context)
 
 
-@login_required(login_url='login')
+@login_required(login_url='login/')
 def userprofile(request,username):
     user_name = User.objects.get(username=username)
     
@@ -94,7 +94,7 @@ def userprofile(request,username):
     return render(request,'all-pages/profile.html',context=context)
 
 
-@login_required(login_url='login')
+@login_required(login_url='login/')
 def newpost(request):
     form = NewPostform(request.POST, request.FILES)
     
@@ -120,6 +120,20 @@ def newpost(request):
     }
     return render(request, 'all-pages/newpost.html', context=context)
 
-@login_required(login_url='login')
-def like(request):
-    return redirect(request, 'all-pages/homepage')
+@login_required(login_url='login/')
+def like(request, post_id):
+    user = request.user
+    post = Post.objects.get(id=post_id)
+    current_likes = post.likes
+    liked = Likes.objects.filter(user=user, post=post).count()
+
+    if not liked:
+        Likes.objects.create(user=user, post=post)
+        current_likes = current_likes + 1
+    else:
+        Likes.objects.filter(user=user, post=post).delete()
+        current_likes = current_likes - 1
+        
+    post.likes = current_likes
+    post.save()
+    return redirect('homepage')
