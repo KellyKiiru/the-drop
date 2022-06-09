@@ -32,6 +32,12 @@ class Post(models.Model):
     posted = models.DateField(auto_now_add=True)
     pub_date = models.DateTimeField(auto_now_add=True)
     
+    def __str__(self):
+        return f'{self.user.first_name} - Post'
+    
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+    
 
 class Comment(models.Model):
     comment_user = models.ForeignKey(User,null=True,on_delete=models.CASCADE)
