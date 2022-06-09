@@ -6,10 +6,15 @@ from .models import *
 from django import forms
 
 class UserSignUpForm(UserCreationForm):
+    username = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Username', 'class': 'prompt srch_explore'}), max_length=50, required=True)
+    email = forms.EmailField(widget=forms.TextInput(attrs={'placeholder': 'Email', 'class': 'prompt srch_explore'}))
+    password1 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Enter Password', 'class': 'prompt srch_explore'}))
+    password2 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Confirm Password', 'class': 'prompt srch_explore'}))
+
+
     class Meta:
         model = User
-        fields = ['username','email','password']
-        
+        fields = ['username', 'email', 'password1', 'password2']
 
 class NewCommentForm(forms.ModelForm):
     comment = forms.CharField(max_length=3300, required=True)
