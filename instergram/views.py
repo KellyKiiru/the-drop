@@ -48,7 +48,7 @@ def signup(request):
     context = {
         'form': form,
     }
-    return render(request, 'all-pages/registration_form.html', context)
+    return render(request, 'all-pages/registration_form.html', context=context)
 
 
 @login_required(login_url='login')
@@ -96,5 +96,26 @@ def userprofile(request,username):
 
 @login_required
 def newpost(request):
+    form = NewPostform(request.POST, request.FILES)
     
-    return render(request, 'all-pages/newpost.html')
+    if request.method == "POST":
+        user = request.user
+        form = NewPostform(request.POST, request.FILES)
+        if form.is_valid():
+            profile = get_object_or_404(Profile, user=user)
+            picture = form.cleaned_data.get('picture')
+            caption = form.cleaned_data.get('caption')
+            user = Profile.objects.get(user=user.id)
+            new_post = Post(
+                picture = picture,
+                caption = caption,
+                user=user,
+            )
+            new_post.save()
+            return redirect('homepage')
+    else:
+        form = NewPostform()
+    context = {
+        'form': form
+    }
+    return render(request, 'all-pages/newpost.html', context=context)
