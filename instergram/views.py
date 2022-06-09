@@ -137,3 +137,8 @@ def like(request, post_id):
     post.likes = current_likes
     post.save()
     return redirect('homepage')
+
+def editprofile(request):
+    user = request.user.id
+    profile = Profile.objects.get(user__id=user)
+    return render(request, 'all-pages/editprofile.html')
