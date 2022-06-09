@@ -19,3 +19,11 @@ class NewCommentForm(forms.ModelForm):
         widgets = {
             'comment': TextInput(attrs={'class': 'input', 'placeholder': 'Write comment','style':'max-width:100%'})
         }
+
+class NewPostform(forms.ModelForm):    
+    picture = forms.ImageField(required=True)
+    caption = forms.CharField(widget=forms.TextInput(attrs={'class': 'input', 'placeholder': 'Caption'}), required=True)
+
+    class Meta:
+        model = Post
+        fields = ['picture', 'caption']
