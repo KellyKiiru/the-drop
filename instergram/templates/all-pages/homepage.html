@@ -123,23 +123,23 @@
                 {% for post in post %}
                 <article class="post">
                     <div class="post__header">
-                            
+
                         <div class="post__profile">
                             {% if post.user.image %}
                             <a href="{{post.user.image.url}}" class="post__avatar">
-                                
+
                                 <img src="{{post.user.image.url}}" alt="User Picture">
-                                
+
                             </a>
-                            <a href="{{post.user.first_name}}" class="post__user">{{post.user.first_name}}</a>
+                            <a href="{{post.user.first_name}}" class="post__user"><u>{{post.user.first_name}}</u></a>
                             {% endif %}
                         </div>
-                </div>
+                    </div>
                     <img src="{{post.picture.url}} " alt="{{post.name}}">
                     {{post.caption}}
                     {{post.pub_date}}
                     {{post.user}}
-                    
+
                 </article>
                 {% endfor %}
                 <section class="side-menu">
@@ -163,9 +163,23 @@
                     <div class="side-menu__suggestions-section">
                         <div class="side-menu__suggestions-header">
                             <h2>Suggestions for You</h2>
-                            <button>See All</button>
                         </div>
-
+                        <div class="side-menu__suggestions-content">
+                            {% for user in all_users %}
+                                {% if request.user.username != user.username %}
+                                <div class="side-menu__suggestion">
+                                    <div class="side-menu__suggestion-info">
+                                        {% if user.profile.first_name %}
+                                        <a href="{% url 'profile' user %}">{{user.profile.first_name|title}} {{user.profile.last_name|title}}</a>
+                                        {% else %}
+                                        <a href="{% url 'profile' user %}">{{user.username}}</a>
+                                        {% endif %}
+                                        <span>@{{user.username}}</span>
+                                    </div>
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
                     </div>
                 </section>
-                {% endblock content %}
+{% endblock content %}
