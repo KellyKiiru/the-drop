@@ -102,6 +102,17 @@
                             </a>
 
                             <div class="post__indicators"></div>
+                        </div><div class="comment-display-homepage">
+                            <div class="post-comment-others">
+                                {% for comment in post_comments %}
+                                {% if post.image_name|lower == comment.post_associated|lower %}
+                                <p>
+                                    <span class="font-weight-bold">{{comment.user.username}}</span>
+                                    <span>{{comment.comment}}</span>
+                                </p>
+                                {% endif %}
+                                {% endfor %}
+                            </div>
                         </div>
                         <div class="post__infos">
                             <div class="post__likes">

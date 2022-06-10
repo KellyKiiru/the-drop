@@ -49,7 +49,7 @@ def homepage(request):
     return render(request,'all-pages/homepage.html', context=context)
 
 def signup(request):
-    form = UserSignUpForm()
+    #form = UserSignUpForm()
     if request.method == "POST":
         form = UserSignUpForm(request.POST)
         if form.is_valid():
@@ -58,7 +58,6 @@ def signup(request):
             username = form.cleaned_data.get('username')
             user_profile=Profile(
                 user=new_user,
-                username=username
             )
             user_profile.save_profile()
             
@@ -81,8 +80,8 @@ def signup(request):
 def userprofile(request,username):
     user_name = User.objects.get(username=username)
     user_profile = Profile.objects.get(user=user_name.id)
-
     user_posts = Post.objects.filter(user=user_name.id)
+    following_count = Follow.objects.filter(follower=user_name).count()
     posts_count = Post.objects.filter(user=user_profile).count()
     post_comments = Comment.objects.all()
 
@@ -117,6 +116,7 @@ def userprofile(request,username):
         'post_comments':post_comments,
         'title':title,
         'posts_count':posts_count,
+        'following_count':following_count,
     }
     return render(request,'all-pages/profile.html',context=context)
 
