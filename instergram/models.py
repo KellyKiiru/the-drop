@@ -17,12 +17,15 @@ class Profile(models.Model):
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
         
-def create_user_profile( instance, created,):
-    if created:
-        Profile.objects.create(user=instance)
+    #def save_profile(self):
+    #    self.save()
+        
+    def create_user_profile( instance, created,):
+        if created:
+            Profile.objects.create(user=instance)
 
-def save_user_profile(instance):
-    instance.profile.save()
+    def save_user_profile(instance):
+        instance.profile.save()
 
 
 class Post(models.Model):

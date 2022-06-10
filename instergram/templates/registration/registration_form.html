@@ -27,7 +27,7 @@
             <img src="{% static 'assets2/images/logo.png' %}" alt="logo">
           </div>
           {{form|crispy}}
-          <button class="form-btn" type="submit" name="Login">Login</button>
+          <button class="form-btn" type="submit" name="Signup">signup</button>
           <span class="has-separator">Or</span>
           <a class="facebook-login" href="#">
             <i class="fab fa-facebook-square"></i> Log in with Facebook
@@ -35,7 +35,7 @@
           <a class="password-reset" href="#">Forgot password?</a>
         </form>
         <div class="sign-up">
-          Already have an account? <a href="/accounts/login/">Sign In</a>
+           <a href="{% url 'sign-up' %}">Sign In</a>
         </div>
         <div class="get-the-app">
           <span>Get the app.</span>

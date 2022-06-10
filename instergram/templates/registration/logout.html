@@ -1,0 +1,16 @@
+{% extends "registration/base.html" %}
+{% load bootstrap3 %}
+{% block content %}
+{% load static %}
+
+<div class="container mt-5">
+    <div class='row text-center' id='update-delete'>
+    <p>You have been logged out</p>
+    </div>
+    <div class='row text-center'>
+    <small class='text-muted'>
+        <a href="{% url 'login' %}">Log In Again</a>
+    </small>
+    </div>
+    </div>
+    {% endblock content %}

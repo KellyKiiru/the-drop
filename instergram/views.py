@@ -9,42 +9,20 @@ from django.urls import reverse
 from django.http import HttpResponseRedirect
 
 # Create your views here.
-@login_required(login_url='sign-up')
+@login_required
 def homepage(request):
     user= request.user
     all_users = User.objects.all()
     profile = Profile.objects.all()
     post = Post.objects.all()
     title = 'Welcome to instagram'
-    post_comments = Comment.objects.all()
-    comment_form = NewCommentForm()
-    
-    if request.method == 'POST':
-        comment_form = NewCommentForm(request.POST)
-        if comment_form.is_valid():
-            comment_post_id = request.POST.get('comment_post')
 
-            user = request.user
-            user_profile = Profile.objects.get(user=user.id)
-            comment_post = Post.objects.get(id=comment_post_id)
-            user_comment = comment_form.cleaned_data['comment']
-
-            comment = Comment(
-                user=user,
-                user_profile=user_profile,
-                user_comment=user_comment,
-                comment_post=comment_post
-                )
-            comment.save()
-            return redirect('homepage')
-    
     context = {
         'post': post,
         'profile': profile,
         'all_users': all_users,
         'title':title,
         'user':user,
-        'post_comments':post_comments,
     }
     return render(request,'all-pages/homepage.html', context=context)
 
@@ -55,16 +33,14 @@ def signup(request):
         if form.is_valid():
             new_user = form.save()
             
-            username = form.cleaned_data.get('username')
             user_profile=Profile(
                 user=new_user,
             )
-            user_profile.save_profile()
+            #user_profile.save_profile()
             
             new_user = authenticate(username=form.cleaned_data['username'],
                                     password=form.cleaned_data['password1'],)
             login(request, new_user)
-            # return redirect('editprofile')
             return redirect('homepage')
     elif request.user.is_authenticated:
         return redirect('homepage')
@@ -76,7 +52,7 @@ def signup(request):
     return render(request, 'registration/registration_form.html', context=context)
 
 
-@login_required(login_url='login/')
+@login_required
 def userprofile(request,username):
     user_name = User.objects.get(username=username)
     user_profile = Profile.objects.get(user=user_name.id)
@@ -121,7 +97,7 @@ def userprofile(request,username):
     return render(request,'all-pages/profile.html',context=context)
 
 
-@login_required(login_url='login/')
+@login_required
 def newpost(request):
     form = NewPostform(request.POST, request.FILES)
     
@@ -179,7 +155,7 @@ def editprofile(request):
             profile.url = form.cleaned_data.get('url')
             profile.bio = form.cleaned_data.get('bio')
             profile.save()
-            return redirect('profile', profile.user.username)
+            return redirect('homepage', profile.user.username)
     else:
         form = EditProfileForm(instance=request.user.profile)
 
