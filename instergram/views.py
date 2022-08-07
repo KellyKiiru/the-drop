@@ -55,9 +55,9 @@ def signup(request):
 @login_required
 def userprofile(request,username):
     user_name = User.objects.get(username=username)
-    user_profile = Profile.objects.get(user=user_name.id)
+    user_profile = Profile.objects.get(user=user.id)
     user_posts = Post.objects.filter(user=user_name.id)
-    following_count = Follow.objects.filter(follower=user_name).count()
+    following_count = Follow.objects.filter(follower=username).count()
     posts_count = Post.objects.filter(user=user_profile).count()
     post_comments = Comment.objects.all()
 
