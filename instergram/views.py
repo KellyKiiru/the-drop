@@ -26,38 +26,38 @@ def homepage(request):
     }
     return render(request,'all-pages/homepage.html', context=context)
 
-def signup(request):
-    #form = UserSignUpForm()
-    if request.method == "POST":
-        form = UserSignUpForm(request.POST)
-        if form.is_valid():
-            new_user = form.save()
+# def signup(request):
+#     #form = UserSignUpForm()
+#     if request.method == "POST":
+#         form = UserSignUpForm(request.POST)
+#         if form.is_valid():
+#             new_user = form.save()
             
-            user_profile=Profile(
-                user=new_user,
-            )
-            #user_profile.save_profile()
+#             user_profile=Profile(
+#                 user=new_user,
+#             )
+#             #user_profile.save_profile()
             
-            new_user = authenticate(username=form.cleaned_data['username'],
-                                    password=form.cleaned_data['password1'],)
-            login(request, new_user)
-            return redirect('homepage')
-    elif request.user.is_authenticated:
-        return redirect('homepage')
-    else:
-        form = UserSignUpForm()
-    context = {
-        'form': form,
-    }
-    return render(request, 'registration/registration_form.html', context=context)
+#             new_user = authenticate(username=form.cleaned_data['username'],
+#                                     password=form.cleaned_data['password1'],)
+#             login(request, new_user)
+#             return redirect('homepage')
+#     elif request.user.is_authenticated:
+#         return redirect('homepage')
+#     else:
+#         form = UserSignUpForm()
+#     context = {
+#         'form': form,
+#     }
+#     return render(request, 'registration/registration_form.html', context=context)
 
 
 @login_required
 def userprofile(request,username):
     user_name = User.objects.get(username=username)
-    user_profile = Profile.objects.get(user=user.id)
+    user_profile = Profile.objects.get(user_profiler_id = user_name.id)
     user_posts = Post.objects.filter(user=user_name.id)
-    following_count = Follow.objects.filter(follower=username).count()
+    following_count = Follow.objects.filter(follower=user_name.id).count()
     posts_count = Post.objects.filter(user=user_profile).count()
     post_comments = Comment.objects.all()
 

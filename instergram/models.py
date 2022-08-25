@@ -4,7 +4,7 @@ import datetime as dt
 # Create your models here.
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, related_name='profile', on_delete=models.CASCADE)
+    user_profiler = models.OneToOneField(User, related_name='profile', on_delete=models.CASCADE)
     image = models.ImageField(upload_to="profile_pciture", null=True)
     first_name = models.CharField(max_length=200, null=True, blank=True)
     last_name = models.CharField(max_length=200, null=True, blank=True)
@@ -12,7 +12,7 @@ class Profile(models.Model):
     location = models.CharField(max_length=200, null=True, blank=True)
     
     def __str__(self):
-        return f'{self.user.username} - Profile'
+        return f'{self.user_profiler.username} - Profile'
     
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
