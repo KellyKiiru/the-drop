@@ -13,7 +13,7 @@
                     </svg>
                 </button>
                 <div class="stories__content">
-                    
+
                     <button class="story">
                         <div class="story__avatar">
                             <div class="story__border">
@@ -28,7 +28,7 @@
                         </div>
                         <span class="story__user">@{{request.user.username}}</span>
                     </button>
-                {% for user in all_users %}
+                    {% for user in all_users %}
                     {% if request.user.username != user.username %}
                     <button class="story side-menu__suggestion-info">
                         <div class="story__avatar">
@@ -44,8 +44,8 @@
                         <span>@{{user.username}}</span>
                     </button>
                     {% endif %}
-                {% endfor %}
-                
+                    {% endfor %}
+
                 </div>
                 <button class="stories__right-button">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -102,7 +102,8 @@
                             </a>
 
                             <div class="post__indicators"></div>
-                        </div><div class="comment-display-homepage">
+                        </div>
+                        <div class="comment-display-homepage">
                             <div class="post-comment-others">
                                 {% for comment in post_comments %}
                                 {% if post.image_name|lower == comment.post_associated|lower %}
@@ -144,7 +145,7 @@
                             {% endif %}
                             <span>@{{request.user.username}}</span>
                         </div>
-                        <a class="side-menu__user-button" href="{% url 'profile' user.username  %}">View Profile</a>
+                        <a class="side-menu__user-button" href="{% url 'profile' user.id %}">View Profile</a>
 
                     </div>
 
@@ -154,28 +155,33 @@
                         </div>
                         <div class="side-menu__suggestions-content">
                             {% for user in all_users %}
-                                {% if request.user.username != user.username %}
-                                <div class="side-menu__suggestion">
-                                    <a href="{% url 'profile' user %}" class="side-menu__suggestion-avatar">
-                                        <img src="{{user.profile.image.url}}" alt="User Picture">
-                                    </a>
-                                    <div class="side-menu__suggestion-info">
-                                        {% if user.profile.first_name %}
-                                        <a href="{% url 'profile' user %}">{{user.profile.first_name|title}} {{user.profile.last_name|title}}</a>
-                                        {% else %}
-                                        <a href="{% url 'profile' user %}">{{user.username}}</a>
-                                        {% endif %}
-                                        <span>@{{user.username}}</span>
-                                    </div>
-                                    {% if follow_status == True %}
-                                    <a href="{% url 'follow' user 0 %}" class="side-menu__suggestion-button">Follow</a>
+                            {% if request.user.username != user.username %}
+                            <div class="side-menu__suggestion">
+                                <a href="{% url 'profile' user.id %}" class="side-menu__suggestion-avatar">
+                                    <img src="{{user.profile.image.url}}" alt="User Picture">
+                                </a>
+                                <div class="side-menu__suggestion-info">
+                                    {% if user.profile.first_name %}
+                                    <a href="{% url 'profile' user.id %}">{{user.profile.first_name|title}}
+                                        {{user.profile.last_name|title}}</a>
                                     {% else %}
-                                    <a href="{% url 'follow' user 1 %}" class="side-menu__suggestion-button">Follow</a>
+                                    <a href="{% url 'profile' user.id %}">{{user.username}}</a>
                                     {% endif %}
+                                    <span>@{{user.username}}</span>
                                 </div>
+                                {% if follow_status == True %}
+                                <a href="{% url 'follow' user 0 %}" class="side-menu__suggestion-button">Follow</a>
+                                {% else %}
+                                <a href="{% url 'follow' user 1 %}" class="side-menu__suggestion-button">Follow</a>
                                 {% endif %}
+                            </div>
+                            {% endif %}
                             {% endfor %}
                         </div>
                     </div>
                 </section>
-{% endblock content %}
+                {% endblock content %}
+            </div>
+        </div>
+    </section>
+</main>

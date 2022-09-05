@@ -73,7 +73,7 @@
                 <a href="">
                     <button class="profile-button">
                         <div class="profile-button__border"></div>
-                        <a href="{% url 'profile' request.user %}">
+                        <a href="{% url 'profile' request.user.id %}">
                             <div class="profile-button__picture">
                                 <img src="{{request.user.profile.image.url}}" alt="User Picture">
                             </div>
