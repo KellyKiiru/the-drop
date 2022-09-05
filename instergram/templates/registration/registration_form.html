@@ -21,21 +21,16 @@
     <div class="container">
       <div class="phone-app-demo"></div>
       <div class="form-data">
-        <form action="" method="POST">
-          {% csrf_token %}
-          <div class="logo">
-            <img src="{% static 'assets2/images/logo.png' %}" alt="logo">
-          </div>
-          {{form|crispy}}
-          <button class="form-btn" type="submit" name="Signup">signup</button>
-          <span class="has-separator">Or</span>
-          <a class="facebook-login" href="#">
-            <i class="fab fa-facebook-square"></i> Log in with Facebook
+        <a class="facebook-login" href="#">
+          <i class="fab fa-facebook-square"></i> Log in with Facebook
+        </a>
+        <div>
+          <a class="google-login" href="/accounts/login/">
+            <i class="fab fa-google-square"></i> Log in with Google
           </a>
-          <a class="password-reset" href="#">Forgot password?</a>
-        </form>
+        </div>
         <div class="sign-up">
-           <a href="{% url 'sign-up' %}">Sign In</a>
+          <a href="/accounts/login/">Log In</a>
         </div>
         <div class="get-the-app">
           <span>Get the app.</span>
