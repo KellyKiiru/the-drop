@@ -15,7 +15,7 @@ def homepage(request):
     all_users = User.objects.all()
     profile = Profile.objects.all()
     post = Post.objects.all()
-    title = 'Welcome to instagram'
+    title = 'Instagram'
 
     context = {
         'post': post,
@@ -53,8 +53,8 @@ def homepage(request):
 
 
 @login_required
-def userprofile(request,username):
-    user_name = User.objects.get(username=username)
+def userprofile(request,id):
+    user_name = User.objects.get(id=id)
     user_profile = Profile.objects.get(user_profiler_id = user_name.id)
     user_posts = Post.objects.filter(user=user_name.id)
     following_count = Follow.objects.filter(follower=user_name.id).count()
@@ -105,10 +105,10 @@ def newpost(request):
         user = request.user
         form = NewPostform(request.POST, request.FILES)
         if form.is_valid():
-            profile = get_object_or_404(Profile, user=user)
+            profile = get_object_or_404(Profile, user_profiler=user)
             picture = form.cleaned_data.get('picture')
             caption = form.cleaned_data.get('caption')
-            user = Profile.objects.get(user=user.id)
+            user = Profile.objects.get(user_profiler=user.id)
             new_post = Post(
                 picture = picture,
                 caption = caption,
