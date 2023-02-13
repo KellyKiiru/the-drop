@@ -55,7 +55,7 @@ def homepage(request):
 @login_required
 def userprofile(request,id):
     user_name = User.objects.get(id=id)
-    user_profile = Profile.objects.get(user_profiler_id = user_name.id)
+    user_profile = Profile.objects.get(user_profiler_id = id.id)
     user_posts = Post.objects.filter(user=user_name.id)
     following_count = Follow.objects.filter(follower=user_name.id).count()
     posts_count = Post.objects.filter(user=user_profile).count()
