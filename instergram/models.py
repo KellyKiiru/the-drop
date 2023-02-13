@@ -17,8 +17,8 @@ class Profile(models.Model):
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
         
-    #def save_profile(self):
-    #    self.save()
+    def save_profile(self):
+       self.save()
         
     def create_user_profile( instance, created,):
         if created:
