@@ -12,7 +12,10 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
-from decouple import config,Csv
+from decouple import config
+from dotenv import load_dotenv
+
+load_dotenv()
 #from database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -23,20 +26,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-&bv6%zo7x5*8u=$)s$m82h!zsj1arhkcripviuo=tiw34smzp%'
+SECRET_KEY = os.environ["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ["DEBUG"]
 
-ALLOWED_HOSTS = ['*']
-
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
 INSTALLED_APPS = [
-    'registration',
-    'crispy_forms',
-    'clearcache',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -46,6 +45,9 @@ INSTALLED_APPS = [
     'instergram',
     'bootstrap3',
     'tinymce',
+    'registration',
+    'crispy_forms',
+    'clearcache',
 
     # The following apps are required:
     'django.contrib.sites',
@@ -95,11 +97,13 @@ WSGI_APPLICATION = 'thedrop.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'thedrop',
-        'USER': 'kellyryan',
-        'PASSWORD': '@Trial2022'
+        'NAME': os.environ["NAME"],
+        'USER': os.environ["USER"],
+        'PASSWORD': os.environ["PASSWORD"],
+        'PORT': os.environ["PORT"]
     }
 }
+
 
 
 # Password validation
