@@ -88,7 +88,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'thedrop.wsgi.application'
+WSGI_APPLICATION = 'thedrop.wsgi.app'
 
 
 # Database
@@ -104,7 +104,11 @@ DATABASES = {
     }
 }
 
-
+# vercel
+KV_URL=os.environ["KV_URL"]
+KV_REST_API_URL=os.environ["KV_REST_API_URL"]
+KV_REST_API_TOKEN=os.environ["KV_REST_API_TOKEN"]
+KV_REST_API_READ_ONLY_TOKEN=os.environ["KV_REST_API_READ_ONLY_TOKEN"]
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
