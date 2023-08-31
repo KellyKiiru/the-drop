@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect,get_object_or_404
 from django.http import HttpResponse
-from django.contrib.auth.decorators import login_required
+# from django.contrib.auth.decorators import login_required
 from .models import *
 from .forms import *
 from django.contrib.auth import authenticate, login
@@ -9,7 +9,7 @@ from django.urls import reverse
 from django.http import HttpResponseRedirect
 
 # Create your views here.
-@login_required
+# @login_required
 def homepage(request):
     user= request.user
     all_users = User.objects.all()
@@ -52,7 +52,7 @@ def homepage(request):
 #     return render(request, 'registration/registration_form.html', context=context)
 
 
-@login_required
+# @login_required
 def userprofile(request,id):
     user_name = User.objects.get(id=id)
     user_profile = Profile.objects.get(user_profiler_id = id.id)
@@ -97,7 +97,7 @@ def userprofile(request,id):
     return render(request,'all-pages/profile.html',context=context)
 
 
-@login_required
+# @login_required
 def newpost(request):
     form = NewPostform(request.POST, request.FILES)
     
@@ -123,7 +123,7 @@ def newpost(request):
     }
     return render(request, 'all-pages/newpost.html', context=context)
 
-@login_required(login_url='login/')
+# @login_required(login_url='login/')
 def like(request, post_id):
     user = request.user
     post = Post.objects.get(id=post_id)
