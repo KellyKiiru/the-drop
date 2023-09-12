@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'django_extensions',
     'instergram',
     'bootstrap3',
     'tinymce',
@@ -51,13 +53,11 @@ INSTALLED_APPS = [
     'clearcache',
 
     # The following apps are required:
-    'django.contrib.sites',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
-    'allauth.socialaccount.providers.facebook',
-    'django_extensions',
+    # 'allauth.socialaccount.providers.facebook'
 ]
 
 MIDDLEWARE = [
@@ -130,6 +130,7 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
 
 
 # Internationalization
