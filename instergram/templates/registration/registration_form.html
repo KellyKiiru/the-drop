@@ -1,0 +1,51 @@
+{%extends "registration/base.html"%} {% load bootstrap3 %}
+{% block content %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://kit.fontawesome.com/fc1e235b2e.js"></script>
+  <link rel="stylesheet" href="{% static 'assets2/style.css' %}">
+  <title>Instagram | Register</title>
+</head>
+
+<body>
+
+  <div id="wrapper">
+    <div class="container">
+      <div class="phone-app-demo"></div>
+      <div class="form-data">
+        <a class="facebook-login" href="#">
+          <i class="fab fa-facebook-square"></i> Log in with Facebook
+        </a>
+        <div>
+          <a class="google-login" href="/accounts/login/">
+            <i class="fab fa-google-square"></i> Log in with Google
+          </a>
+        </div>
+        <div class="sign-up">
+          <a href="/accounts/login/">Log In</a>
+        </div>
+        <div class="get-the-app">
+          <span>Get the app.</span>
+          <div class="badges">
+            <img src="{% static 'assets2/images/app-store.png' %}" alt="app-store badge">
+            <img src="{% static 'assets2/images/google-play.png' %}" alt="google-play badge">
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+</body>
+
+</html>
+{% endblock %}
